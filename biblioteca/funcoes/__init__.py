@@ -1,4 +1,56 @@
+from itertools import count
 from time import sleep
+def formatadata(msg):
+    while True:
+        data = str(input(msg)).strip()
+        if data.count('/') < 2:
+            print(f'Data {data} faltando "/" Redigite: ' )
+        else:
+            data1 = str(data).replace('/',' ').split(' ')
+
+            dia = int(data1[0])
+
+            mes = int(data1[1])
+
+            ano = int(data1[2])
+            if dia > 31 or mes > 12 or ano < 0 or len(data) < 10 or data.count('/') < 2:
+                print('Data inválida ! ')
+
+            else:
+                return data
+
+def verificaTexto(msg):
+    while True:
+        descricao = str(input(msg)).strip()
+        if descricao in '' or descricao in ' ':
+            print('Descrição Inválida ! Digite uma nova.')
+        else:
+            return descricao
+
+def validaValor(msg):
+    valor = 0
+    ok = False
+    while True:
+        n = str(input(msg)).strip().replace(',','.')
+        try:
+            n = float(n)
+        except Exception as error:
+            print(f'Ocorreu um erro de: {error.__cause__}.')
+        else:
+            valor = n
+            ok = True
+        if ok:
+            break
+    return valor
+
+def validaStatus(msg):
+    while True:
+        status = str(input(msg)).strip().upper()
+        if status == 'DEBITO' or status == 'CREDITO':
+            return status
+        else:
+            print('Aceita-se a palavra "CREDITO" ou "DEBITO".  Redigite ! ')
+
 def limpar_tela():
     import os
     os.system('cls' if os.name=='nt'else 'clear')
@@ -25,9 +77,9 @@ def balanco():
             else:
                 break
         if tipo in 'D':
-            extrato[1].append(float(input('Digite o Valor do Débito: R$ ')))
+            extrato[1].append(validaValor('Digite o Valor do Débito: R$ '))
         elif tipo in 'C':
-            extrato[0].append(float(input('Digite o valor do Crédito: R$ ')))
+            extrato[0].append(validaValor('Digite o valor do Crédito: R$ '))
         linha()
         resp = str(input('Quer Continuar ?(S/N) ')).strip().upper()[0]
         if resp in 'Nn':
@@ -43,7 +95,7 @@ def balanco():
         print(f'{j} ==> R$ {debito:.2f}')
     print('-'*50)
     sleep(0.3)
-    datainicial = str(input('Digite data (dd/mm/aaaa): ')).strip()
+    datainicial = formatadata('Digite data (dd/mm/aaaa): ')
     if len(extrato[0]) == 0:
         entradas = 0
     else:
@@ -81,10 +133,10 @@ def despesas(msg="WILLIAM"):
     limpar_tela()
     while True:
         cabecalho(f'Entre com os lançamentos de Débitos e Créditos de: {msg}. ')
-        descricao = str(input('Digite a descrição do lançamento: ')).strip().upper()
-        data = str(input('Digite a Data do lançamento (dd/mm/aaaa): ')).strip()
-        valor = float(input('Digite o valor do lançamento: R$ '))
-        status = str(input('Seu lançamento é um Crédito ou um Débito ? ')).strip().upper()
+        descricao = verificaTexto('Digite a descrição do lançamento: ').upper()
+        data = formatadata('Digite a Data do lançamento (dd/mm/aaaa): ')
+        valor = validaValor('Digite o valor do lançamento: R$ ')
+        status = validaStatus('Seu lançamento é um Crédito ou um Débito ? ')
         opcao = str(input('Deseja gravar na planilha ?(S/N) ')).strip().upper()[0]
         if opcao in 'S':
             wb = load_workbook(r"G:\Meu Drive\despesas\despesas.xlsx")
