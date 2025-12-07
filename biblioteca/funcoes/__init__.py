@@ -128,7 +128,7 @@ def balanco():
     limpar_tela()
     return
 
-def despesas(msg="WILLIAM"):
+def despesas(msg="EDUARDO"):
     from openpyxl import Workbook, load_workbook
     limpar_tela()
     while True:
@@ -139,7 +139,7 @@ def despesas(msg="WILLIAM"):
         status = validaStatus('Seu lançamento é um Crédito ou um Débito ? ')
         opcao = str(input('Deseja gravar na planilha ?(S/N) ')).strip().upper()[0]
         if opcao in 'S':
-            wb = load_workbook(r"G:\Meu Drive\despesas\despesas.xlsx")
+            wb = load_workbook(r"C:\Users\eduar\OneDrive\Documentos\GitHub\sistemas_despesas\Arquivo\despesas.xlsx")
             ws = wb.active
             ws = wb[msg]
             linha1 = ws.max_row
@@ -148,7 +148,7 @@ def despesas(msg="WILLIAM"):
             ws.cell(row=linha1 + 1, column=3, value=valor)
             ws.cell(row=linha1 + 1, column=4, value=status)
             try:
-                wb.save(r"G:\Meu Drive\despesas\despesas.xlsx")
+                wb.save(r"C:\Users\eduar\OneDrive\Documentos\GitHub\sistemas_despesas\Arquivo\despesas.xlsx")
             except:
                 print('Erro ao gravar arquivo.')
             else:

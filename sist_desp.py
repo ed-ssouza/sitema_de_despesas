@@ -3,13 +3,13 @@ from time import sleep
 interface.limpar_tela()
 interface.cabecalho('*** Sistema de Lançamentos - versão: 1.0 ***')
 while True:
-    n = interface.menu(['Lançar Balanço','Lançar Créditos e Débitos em William','Lançar Créditos e Débitos em Zenilda', 'Finalizar'])
+    n = interface.menu(['Lançar Créditos e Débitos em Eduardo','Lançar Créditos e Débitos em Xênia', 'Lançar Créditos e Débitos em Murilo','Finalizar'])
     if n ==1:
-        funcoes.balanco()
-    elif n == 2:
         funcoes.despesas()
+    elif n == 2:
+        funcoes.despesas("XENIA")
     elif n == 3:
-        funcoes.despesas("ZENILDA")
+        funcoes.despesas("MURILO")
     elif n == 4:
        interface.cabecalho('Saindo do Sistema...')
        sleep(0.9)
