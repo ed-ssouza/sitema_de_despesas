@@ -3,7 +3,7 @@ from time import sleep
 interface.limpar_tela()
 interface.cabecalho('*** Sistema de Lançamentos - versão: 1.0 ***')
 while True:
-    n = interface.menu(['Lançar Créditos e Débitos em Eduardo','Lançar Créditos e Débitos em Xênia', 'Lançar Créditos e Débitos em Murilo','Finalizar'])
+    n = interface.menu(['Lançar Créditos e Débitos em Eduardo.','Lançar Créditos e Débitos em Xênia', 'Lançar Créditos e Débitos em Murilo','Finalizar'])
     if n ==1:
         funcoes.despesas()
     elif n == 2:
